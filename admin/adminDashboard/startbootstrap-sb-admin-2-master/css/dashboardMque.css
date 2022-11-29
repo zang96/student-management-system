@@ -1,0 +1,6 @@
+@media only screen and (max-width: 375px) {
+    .add-user h1{
+        margin-right: 5000px;
+        background-color: red;
+    }
+  }

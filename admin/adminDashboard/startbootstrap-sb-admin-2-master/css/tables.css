@@ -1,0 +1,13 @@
+.parent{
+    display: flex;
+    flex-direction: row;
+}
+
+.item1{
+    position: relative;
+    margin-right: 5px;
+}
+
+.item2{
+    position: relative;
+}
