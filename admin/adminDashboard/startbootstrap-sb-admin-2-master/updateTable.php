@@ -2,8 +2,17 @@
 
 require_once '../../../Helpers/session.php';
 require_once '../../../Models/Database/dbConnect.php';
-
 $id = $_GET['updateid'];
+$sql = "select * from `tables` where id = $id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$name = $row['full_name'];
+$sex = $row['sex'];
+$houseAddress = $row['house_address'];
+$institution = $row['institution'];
+$gradUndergrad = $row['graduate_undergraduate'];
+$email = $row['email'];
+$phone = $row['phone_number'];
 
 if (isset($_POST['submit'])) {
 
@@ -14,18 +23,17 @@ if (isset($_POST['submit'])) {
     $grade_undergrade = $_POST['gradge_under'];
     $email = $_POST['email'];
     $phoneNumber = $_POST['phone'];
-    
+
     $sql = "update `tables` set  full_name='$fullName', sex='$genders', house_address='$houseAddress', institution='$institution', graduate_undergraduate='$grade_undergrade', email='$email', phone_number='$phoneNumber' where id=$id";
-    
+
     $result = mysqli_query($conn, $sql);
-    
-    if($result){
+
+    if ($result) {
         header('location:tables.php');
-    } else{
+    } else {
         echo die(mysqli_error($conn));
     }
-    
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +85,7 @@ if (isset($_POST['submit'])) {
             </li>
 
             <!-- Divider -->
-            
+
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -86,7 +94,7 @@ if (isset($_POST['submit'])) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                
+
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
@@ -98,7 +106,7 @@ if (isset($_POST['submit'])) {
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                
+
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
@@ -114,11 +122,11 @@ if (isset($_POST['submit'])) {
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                
+
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
@@ -134,7 +142,7 @@ if (isset($_POST['submit'])) {
             </li>
 
             <!-- Nav Item - Charts -->
-            
+
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -171,9 +179,8 @@ if (isset($_POST['submit'])) {
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    
-                    <img class="img-profile rounded-circle"
-                                    src="img/educationLogo.png" height="80px">
+
+                    <img class="img-profile rounded-circle" src="img/educationLogo.png" height="80px">
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -213,8 +220,8 @@ if (isset($_POST['submit'])) {
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                
-                                
+
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -252,7 +259,7 @@ if (isset($_POST['submit'])) {
                                     <h6 class="m-0 font-weight-bold text-primary">Registration</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Dropdown Header:</div>
@@ -268,43 +275,43 @@ if (isset($_POST['submit'])) {
 
                                     <div class="form-group mb-3">
 
-                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Full Name" name="name" autocomplete="off">
+                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Full Name" name="name" autocomplete="off" value="<?php echo $name;?>">
                                     </div>
 
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" value="male" id="customRadioInline1"  class="custom-control-input" name="gender" checked="checked">
+                                        <input type="radio" value="male" id="customRadioInline1" class="custom-control-input" name="gender" checked="check" value="<?php echo $sex;?>">
                                         <label class="custom-control-label" for="customRadioInline1">Male</label>
                                     </div>
 
 
                                     <div class="custom-control custom-radio custom-control-inline mb-3">
-                                        <input type="radio" value="female" id="customRadioInline2"  class="custom-control-input" name="gender">
+                                        <input type="radio" value="female" id="customRadioInline2" class="custom-control-input" name="gender" value="<?php echo $sex;?>">
                                         <label class="custom-control-label" for="customRadioInline2">Female</label>
 
 
                                     </div>
 
-                                    
+
 
                                     <div class="form-group">
 
-                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="House Address" name="house" autocomplete="off">
+                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="House Address" name="house" autocomplete="off" value="<?php echo $houseAddress;?>">
                                     </div>
 
                                     <div class="form-group mb-3">
 
-                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Institution" name="institution">
+                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Institution" name="institution" value="<?php echo $institution;?>">
                                     </div>
 
                                     <!-- start here -->
 
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" value="Graduate" id="flexRadioDefault1"  class="custom-control-input" name="gradge_under" checked="checked">
+                                        <input type="radio" value="Graduate" id="flexRadioDefault1" class="custom-control-input" name="gradge_under" checked="check" value="<?php echo $gradUndergrad;?>">
                                         <label class="custom-control-label" for="flexRadioDefault1">Graduate</label>
                                     </div>
 
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" value="Undergraduate" id="flexRadioDefault2"  class="custom-control-input" name="gradge_under">
+                                    <div class="custom-control custom-radio custom-control-inline mb-3">
+                                        <input type="radio" value="Undergraduate" id="flexRadioDefault2" class="custom-control-input" name="gradge_under" value="<?php echo $gradUndergrad;?>">
                                         <label class="custom-control-label" for="flexRadioDefault2">Undergraduate</label>
                                     </div>
 
@@ -314,15 +321,15 @@ if (isset($_POST['submit'])) {
 
                                     </div>
 
-                                    
-                                    
+
+
 
 
 
                                     <div class="form-group">
 
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email" autocomplete="off">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email;?>">
+                                        
                                     </div>
 
 
@@ -330,7 +337,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="form-group">
 
-                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone" autocomplete="off">
+                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone" autocomplete="off" value="<?php echo $phone;?>">
                                     </div>
 
 
@@ -340,7 +347,7 @@ if (isset($_POST['submit'])) {
                         </div>
 
                         <!-- Pie Chart -->
-                        
+
                     </div>
 
                     <!-- Content Row -->
@@ -362,7 +369,8 @@ if (isset($_POST['submit'])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span><p class="love">Made with <ion-icon name="heart" class="text-danger"></ion-icon> by Moses</p></span>
+                        
                     </div>
                 </div>
             </footer>
@@ -414,6 +422,8 @@ if (isset($_POST['submit'])) {
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 
